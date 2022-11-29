@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "944956144270",
+    "project_id": "tiket-kereta-25b82",
+    "storage_bucket": "tiket-kereta-25b82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:944956144270:android:748aac0739fd8ff70ce7df",
+        "android_client_info": {
+          "package_name": "com.example.tiketkereta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "944956144270-ug4ba671u7g7fa1lli545e9b14u8tnj6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tiketkereta",
+            "certificate_hash": "9e686c69bcaf73a52aa17c51c62ee6cb63839b5e"
+          }
+        },
+        {
+          "client_id": "944956144270-44enefhbbmapfj0m1dvsdmqr20d61p2v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfa3lT6sbHTVqMelCNm49NtpaDyPPpGXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "944956144270-44enefhbbmapfj0m1dvsdmqr20d61p2v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
