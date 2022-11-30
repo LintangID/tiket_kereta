@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Tiket Kereta</string>
+    <string-array name="tujuan">
+        <item>Jakarta</item>
+        <item>Semarang</item>
+        <item>Solo</item>
+        <item>Purwokerto</item>
+    </string-array>
+
+    <string-array name="kelas">
+        <item>Eksekutif</item>
+        <item>Bisnis</item>
+        <item>Ekonomi</item>
+    </string-array>
 </resources>

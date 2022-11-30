@@ -15,7 +15,7 @@
         app:elevation="0dp">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/tbBack"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             app:navigationIcon="@drawable/ic_back">
@@ -83,7 +83,7 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="20dp"
                             android:layout_marginEnd="20dp"
-                            android:text="Mohon isi data dibawah ini sesuai dengan KTP Anda"
+                            android:text="Mohon isi data di bawah ini sesuai dengan KTP Anda"
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
@@ -142,6 +142,7 @@
 
                             <androidx.appcompat.widget.AppCompatSpinner
                                 android:id="@+id/spBerangkat"
+                                android:entries="@array/tujuan"
                                 android:layout_width="match_parent"
                                 android:layout_height="45dp"
                                 android:layout_below="@+id/tvBerangkat"
@@ -184,6 +185,7 @@
 
                             <androidx.appcompat.widget.AppCompatSpinner
                                 android:id="@+id/spTujuan"
+                                android:entries="@array/tujuan"
                                 android:layout_width="match_parent"
                                 android:layout_height="45dp"
                                 android:layout_below="@+id/tvTujuan"
@@ -217,7 +219,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Anak-anak (16+ tahun)"
+                            android:text="Anak-anak (di bawah 16 tahun)"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -326,6 +328,7 @@
 
                         <androidx.appcompat.widget.AppCompatSpinner
                             android:id="@+id/spKelas"
+                            android:entries="@array/kelas"
                             android:layout_width="match_parent"
                             android:layout_height="45dp"
                             android:layout_below="@+id/tvKelas"
@@ -370,13 +373,13 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="50dp"
                                 android:backgroundTint="@color/primary"
-                                android:focusableInTouchMode="false"
+                                android:focusableInTouchMode="true"
                                 android:hint="Masukan tanggal"
                                 android:imeOptions="actionNext"
                                 android:inputType="date"
                                 android:maxLines="1"
                                 android:textColor="@color/black"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"/>
 
                         </LinearLayout>
 
@@ -418,11 +421,11 @@
             </androidx.cardview.widget.CardView>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnCheckout"
+                android:id="@+id/btnPesan"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_margin="30dp"
-                android:text="Jemput Sekarang"
+                android:text="Pesan Sekarang"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp"
