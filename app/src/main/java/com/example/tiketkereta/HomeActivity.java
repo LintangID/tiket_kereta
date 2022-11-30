@@ -1,30 +1,37 @@
+
 package com.example.tiketkereta;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
+    private TextView tvNama, tvTiket, tvPesan;
+    private ImageView imgLogout;
     private FirebaseUser firebaseUser;
-    private TextView tvNama;
-    private Button btnLogout;
 
-    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        tvNama = findViewById(R.id.tvNama);
-        btnLogout = findViewById(R.id.btn_logout);
+        setContentView(R.layout.activity_home);
 
+        if (getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
+
+        tvNama = findViewById(R.id.tvNama);
+        tvPesan = findViewById(R.id.tvPesan);
+        tvTiket = findViewById(R.id.tvTiket);
+        imgLogout = findViewById(R.id.imageLogout);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
 
         if (firebaseUser!=null){
             tvNama.setText(firebaseUser.getDisplayName());
@@ -32,10 +39,19 @@ public class MainActivity extends AppCompatActivity {
             tvNama.setText("Login Gagal");
         }
 
-        btnLogout.setOnClickListener(v -> {
+        imgLogout.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(getApplicationContext(),LoginActivity.class));
             finish();
         });
+
+        tvPesan.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), PesanActivity.class));
+        });
+
+        tvTiket.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(),ListActivity.class));
+        });
+
     }
 }

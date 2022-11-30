@@ -14,13 +14,20 @@
         android:theme="@style/Theme.TiketKereta"
         tools:targetApi="31">
         <activity
+            android:name=".ListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PesanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">

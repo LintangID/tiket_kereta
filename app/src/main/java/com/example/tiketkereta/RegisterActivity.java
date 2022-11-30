@@ -30,6 +30,10 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        if (getSupportActionBar() != null){
+            getSupportActionBar().hide();
+        }
+
         etNama = findViewById(R.id.nama);
         etEmail = findViewById(R.id.email);
         etPassword = findViewById(R.id.password);
@@ -63,13 +67,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register (String nama, String email, String password){
-        progressDialog.show();
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful() && task.getResult()!=null){
                     FirebaseUser firebaseuser = task.getResult().getUser();
                     if (firebaseuser!= null) {
+                        progressDialog.show();
                         UserProfileChangeRequest request = new UserProfileChangeRequest.Builder().setDisplayName(nama).build();
                         firebaseuser.updateProfile(request).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -88,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void reload(){
-        Intent reload = new Intent(RegisterActivity.this, MainActivity.class);
+        Intent reload = new Intent(RegisterActivity.this, HomeActivity.class);
         startActivity(reload);
     }
 
