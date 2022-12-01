@@ -92,7 +92,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void reload(){
-        Intent reload = new Intent(RegisterActivity.this, HomeActivity.class);
+        Intent reload = new Intent(RegisterActivity.this, LoginActivity.class);
         startActivity(reload);
     }
 
