@@ -142,12 +142,12 @@
 
                             <androidx.appcompat.widget.AppCompatSpinner
                                 android:id="@+id/spBerangkat"
-                                android:entries="@array/tujuan"
                                 android:layout_width="match_parent"
                                 android:layout_height="45dp"
                                 android:layout_below="@+id/tvBerangkat"
                                 android:layout_marginTop="10dp"
                                 android:background="@drawable/spinner_background"
+                                android:entries="@array/tujuan"
                                 android:spinnerMode="dropdown" />
 
                             <ImageView

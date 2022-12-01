@@ -1,27 +1,26 @@
 package com.example.tiketkereta.model;
 
-public class Pemesanan {
-    private String nama, keberangkatan, tujuan, kelas, tanggal;
-    private int anak, dewasa, telepon;
+import com.google.errorprone.annotations.Var;
 
-    public Pemesanan(String nama, String keberangkatan, String tujuan, String tanggal, String kelas){
+public class Pemesanan {
+    private String id, nama, keberangkatan, tujuan, kelas, tanggal, hargaTiket;
+
+    public Pemesanan(String nama, String keberangkatan, String tujuan, String tanggal, String kelas, String hargaTiket){
         this.nama = nama;
         this.keberangkatan = keberangkatan;
         this.tujuan = tujuan;
         this.tanggal = tanggal;
         this.kelas = kelas;
+        this.hargaTiket = hargaTiket;
     }
 
-//    public Pemesanan(String nama, String berangkat, String tujuan, int anak, int dewasa, String kelas, String tanggal, int telepon){
-//        this.nama = nama;
-//        this.berangkat = berangkat;
-//        this.tujuan = tujuan;
-//        this.anak = anak;
-//        this.dewasa = dewasa;
-//        this.kelas = kelas;
-//        this.tanggal = tanggal;
-//        this.telepon = telepon;
-//    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getNama() {
         return nama;
@@ -63,27 +62,11 @@ public class Pemesanan {
         this.tanggal = tanggal;
     }
 
-    public int getAnak() {
-        return anak;
+    public String getHargaTiket() {
+        return hargaTiket;
     }
 
-    public void setAnak(int anak) {
-        this.anak = anak;
-    }
-
-    public int getDewasa() {
-        return dewasa;
-    }
-
-    public void setDewasa(int dewasa) {
-        this.dewasa = dewasa;
-    }
-
-    public int getTelepon() {
-        return telepon;
-    }
-
-    public void setTelepon(int telepon) {
-        this.telepon = telepon;
+    public void setHargaTiket(String hargaTiket) {
+        this.hargaTiket = hargaTiket;
     }
 }

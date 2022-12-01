@@ -15,8 +15,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.DocumentReference;
@@ -32,7 +34,8 @@ public class PesanActivity extends AppCompatActivity {
 
     private Toolbar tbBack;
     private TextInputEditText inputNama,date, inputTelepon;
-    private int hitung1, hitung2, jmlAnak, jmlDewasa, telepon;
+    private String hargaTotal, id = "",exKeberangkatan, exTujuan, exKelas;
+    private int  hitung1, hitung2, jmlAnak,telepon, jmlDewasa, hargaKelas, hargaAnak, hargaDewasa, hargaTotalAnak, hargaTotalDewasa, jmlHarga, indexBerangkat, indexTujuan, indexKelas;
     private TextView tvJmlAnak, tvJmlDewasa;
     private ImageView imgAdd1, imgMinus1, imgAdd2, imgMinus2;
     private SimpleDateFormat dateFormater;
@@ -126,13 +129,56 @@ public class PesanActivity extends AppCompatActivity {
             }
         });
 
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDateDialog();
+            }
+        });
+
         btnPesan.setOnClickListener(v ->{
             if(inputNama.getText().length() > 0 && tvJmlAnak.getText() != "0" && tvJmlDewasa.getText() != "0" && date.getText().length() > 0 && inputTelepon.getText().toString().length() > 0 ){
                 if (spBerangkat.getSelectedItem().toString() != spTujuan.getSelectedItem().toString()){
+
                     telepon = Integer.parseInt(inputTelepon.getText().toString());
                     jmlAnak = Integer.parseInt(tvJmlAnak.getText().toString());
                     jmlDewasa = Integer.parseInt(tvJmlDewasa.getText().toString());
-                    saveData(inputNama.getText().toString(),spBerangkat.getSelectedItem().toString(),spTujuan.getSelectedItem().toString(), jmlAnak, jmlDewasa, spKelas.getSelectedItem().toString(), date.getText().toString(),telepon);
+
+                    if (spBerangkat.getSelectedItem().toString().equals("Jakarta") && spTujuan.getSelectedItem().toString().equals("Solo")){
+                        hargaAnak = 50000;
+                        hargaDewasa = 75000;
+                    }else if(spBerangkat.getSelectedItem().toString().equals("Jakarta") && spTujuan.getSelectedItem().toString().equals("Purwokerto")){
+                        hargaAnak = 30000;
+                        hargaDewasa = 50000;
+                    }else if(spBerangkat.getSelectedItem().toString().equals("Purwokerto") && spTujuan.getSelectedItem().toString().equals("Jakarta")){
+                        hargaAnak = 30000;
+                        hargaDewasa = 50000;
+                    }else if(spBerangkat.getSelectedItem().toString().equals("Purwokerto") && spTujuan.getSelectedItem().toString().equals("Solo")){
+                        hargaAnak = 25000;
+                        hargaDewasa = 40000;
+                    }else if(spBerangkat.getSelectedItem().toString().equals("Solo") && spTujuan.getSelectedItem().toString().equals("Purwokerto")){
+                        hargaAnak = 25000;
+                        hargaDewasa = 40000;
+                    }else{
+                        hargaAnak = 50000;
+                        hargaDewasa = 75000;
+                    }
+
+                    if (spKelas.getSelectedItem().toString().equals("Eksekutif")) {
+                        hargaKelas = 200000;
+                    } else if (spKelas.getSelectedItem().toString().equals("Bisnis")) {
+                        hargaKelas = 100000;
+                    } else {
+                        hargaKelas = 80000;
+                    }
+
+                    hargaTotalAnak = jmlAnak * hargaAnak;
+                    hargaTotalDewasa = jmlDewasa * hargaDewasa;
+                    jmlHarga = hargaTotalAnak + hargaTotalDewasa + hargaKelas;
+                    hargaTotal = String.valueOf(jmlHarga);
+
+                    saveData(inputNama.getText().toString(),spBerangkat.getSelectedItem().toString(),spTujuan.getSelectedItem().toString(), jmlAnak, jmlDewasa, spKelas.getSelectedItem().toString(), date.getText().toString(),telepon,hargaTotal);
                 }else{
                     Toast.makeText(getApplicationContext(), "Keberangkatan dan tujuan tidak boleh sama",Toast.LENGTH_SHORT).show();
                 }
@@ -141,15 +187,28 @@ public class PesanActivity extends AppCompatActivity {
             }
         });
 
-        date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDateDialog();
-            }
-        });
+        Intent intent = getIntent();
+        if (intent != null){
+            id = intent.getStringExtra("id");
+            inputNama.setText(intent.getStringExtra("nama"));
+            date.setText(intent.getStringExtra("tanggal"));
+            inputTelepon.setText(intent.getStringExtra("telepon"));
+//            exKeberangkatan = intent.getStringExtra("keberangkatan");
+//            if (exKeberangkatan.equals("Jakarta")){
+//                indexBerangkat = 0;
+//                spBerangkat.setSelection(indexBerangkat);
+//            } else if (exKeberangkatan.equals("Solo")) {
+//                indexBerangkat = 1;
+//                spBerangkat.setSelection(indexBerangkat);
+//            } else {
+//                indexBerangkat = 2;
+//                spBerangkat.setSelection(indexBerangkat);
+//            }
+        }
+
     }
 
-    private void saveData(String nama, String berangkat, String tujuan, int anak, int dewasa, String kelas, String tanggal, int telepon){
+    private void saveData(String nama, String berangkat, String tujuan, int anak, int dewasa, String kelas, String tanggal, int telepon, String hargaTiket){
         Map<String, Object> pemesanan = new HashMap<>();
         pemesanan.put("nama",nama);
         pemesanan.put("keberangkatan",berangkat);
@@ -159,26 +218,42 @@ public class PesanActivity extends AppCompatActivity {
         pemesanan.put("kelas",kelas);
         pemesanan.put("tanggal",tanggal);
         pemesanan.put("nomor telepon",telepon);
+        pemesanan.put("harga tiket",hargaTiket);
 
         progressDialog.show();
-        db.collection("tiket")
-                .add(pemesanan)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(getApplicationContext(), "berhasil", Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                        finish();
-                    }
-                })
+        if(id!=null){
+            db.collection("tiket").document(id)
+                    .set(pemesanan)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                Toast.makeText(getApplicationContext(), "berhasil", Toast.LENGTH_SHORT).show();
+                                finish();
+                            } else {
+                                Toast.makeText(getApplicationContext(), "gagal", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }else{
+            db.collection("tiket")
+                    .add(pemesanan)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            Toast.makeText(getApplicationContext(), "berhasil", Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                            finish();
+                        }
+                    })
 
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                    }
-                });
-
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }
+                    });
+        }
     }
 }

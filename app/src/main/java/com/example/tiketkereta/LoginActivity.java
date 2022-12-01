@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,6 +22,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
     private Button btnLogin, btnRegister;
+    private TextView tvRegister;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
 
@@ -36,7 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.email);
         etPassword = findViewById(R.id.password);
         btnLogin = findViewById(R.id.btnLogin);
-        btnRegister = findViewById(R.id.btnRegister);
+        tvRegister = findViewById(R.id.tvRegister);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -46,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("silahkan tunggu");
         progressDialog.setCancelable(false);
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent register = new Intent(LoginActivity.this, RegisterActivity.class);

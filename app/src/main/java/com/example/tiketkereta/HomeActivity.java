@@ -2,6 +2,7 @@
 package com.example.tiketkereta;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView tvNama, tvTiket, tvPesan;
     private ImageView imgLogout;
     private FirebaseUser firebaseUser;
+    private CardView cvPesan, cvTiket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +31,8 @@ public class HomeActivity extends AppCompatActivity {
         tvNama = findViewById(R.id.tvNama);
         tvPesan = findViewById(R.id.tvPesan);
         tvTiket = findViewById(R.id.tvTiket);
+        cvPesan = findViewById(R.id.cvPesan);
+        cvTiket = findViewById(R.id.cvTiket);
         imgLogout = findViewById(R.id.imageLogout);
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -45,8 +49,16 @@ public class HomeActivity extends AppCompatActivity {
             finish();
         });
 
+        cvPesan.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), PesanActivity.class));
+        });
+
         tvPesan.setOnClickListener(v -> {
             startActivity(new Intent(getApplicationContext(), PesanActivity.class));
+        });
+
+        cvTiket.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(),ListActivity.class));
         });
 
         tvTiket.setOnClickListener(v -> {

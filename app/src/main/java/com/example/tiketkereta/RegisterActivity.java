@@ -21,7 +21,7 @@ import com.google.firebase.auth.UserProfileChangeRequest;
 public class RegisterActivity extends AppCompatActivity {
     private EditText etNama, etEmail, etPassword, etPasswordConfirm;
     private Button btnRegister,btnPunya;
-//    private TextView tvPunya;
+    private TextView tvLogin;
     private ProgressDialog progressDialog;
     private FirebaseAuth mAuth;
 
@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         etPassword = findViewById(R.id.password);
         etPasswordConfirm = findViewById(R.id.passwordConfirm);
         btnRegister = findViewById(R.id.btnRegister);
-        btnPunya = findViewById(R.id.punyaAkun);
+        tvLogin = findViewById(R.id.tvLogin);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         progressDialog.setMessage("silahkan tunggu");
         progressDialog.setCancelable(false);
 
-        btnPunya.setOnClickListener(v -> {
+        tvLogin.setOnClickListener(v -> {
             finish();
         });
 

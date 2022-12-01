@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Tiket Kereta</string>
+    <string name="register">
+        <u>belum punya akun?</u>
+    </string>
+    <string name="login">
+        <u>sudah punya akun?</u>
+    </string>
     <string-array name="tujuan">
         <item>Jakarta</item>
-        <item>Semarang</item>
         <item>Solo</item>
         <item>Purwokerto</item>
     </string-array>

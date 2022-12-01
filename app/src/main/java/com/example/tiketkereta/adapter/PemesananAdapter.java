@@ -23,8 +23,8 @@ public class PemesananAdapter extends RecyclerView.Adapter<PemesananAdapter.Myvi
         void onClick(int pos);
     }
 
-    public Dialog getDialog() {
-        return dialog;
+    public void setDialog(Dialog dialog){
+        this.dialog = dialog;
     }
 
     public PemesananAdapter(Context context, List<Pemesanan> list){
@@ -44,7 +44,7 @@ public class PemesananAdapter extends RecyclerView.Adapter<PemesananAdapter.Myvi
         holder.kelas.setText(list.get(position).getKelas());
         holder.tanggal.setText(list.get(position).getTanggal());
         holder.nama.setText(list.get(position).getNama());
-        holder.harga.setText(list.get(position).getNama());
+        holder.harga.setText(list.get(position).getHargaTiket());
         holder.kode1.setText(list.get(position).getKeberangkatan());
         holder.keberangkatan.setText(list.get(position).getKeberangkatan());
         holder.kode2.setText(list.get(position).getTujuan());
@@ -70,8 +70,14 @@ public class PemesananAdapter extends RecyclerView.Adapter<PemesananAdapter.Myvi
             keberangkatan = itemView.findViewById(R.id.tvKeberangkatan);
             kode2 = itemView.findViewById(R.id.tvKode2);
             tujuan = itemView.findViewById(R.id.tvTujuan);
-
-
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(dialog != null){
+                        dialog.onClick(getLayoutPosition());
+                    }
+                }
+            });
         }
     }
 }
