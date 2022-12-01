@@ -60,7 +60,6 @@ public class ListActivity extends AppCompatActivity {
                                 intent.putExtra("id", list.get(pos).getId());
                                 intent.putExtra("nama", list.get(pos).getNama());
                                 intent.putExtra("tanggal", list.get(pos).getTanggal());
-                                intent.putExtra("keberangkatan",list.get(pos).getKeberangkatan());
                                 startActivity(intent);
                                 break;
                             case 1:

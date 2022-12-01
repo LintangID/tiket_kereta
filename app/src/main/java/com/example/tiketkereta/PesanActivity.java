@@ -192,18 +192,6 @@ public class PesanActivity extends AppCompatActivity {
             id = intent.getStringExtra("id");
             inputNama.setText(intent.getStringExtra("nama"));
             date.setText(intent.getStringExtra("tanggal"));
-            inputTelepon.setText(intent.getStringExtra("telepon"));
-//            exKeberangkatan = intent.getStringExtra("keberangkatan");
-//            if (exKeberangkatan.equals("Jakarta")){
-//                indexBerangkat = 0;
-//                spBerangkat.setSelection(indexBerangkat);
-//            } else if (exKeberangkatan.equals("Solo")) {
-//                indexBerangkat = 1;
-//                spBerangkat.setSelection(indexBerangkat);
-//            } else {
-//                indexBerangkat = 2;
-//                spBerangkat.setSelection(indexBerangkat);
-//            }
         }
 
     }
